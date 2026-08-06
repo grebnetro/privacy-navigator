@@ -85,17 +85,28 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white px-4 lg:px-8 py-3.5 shadow-xl">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl shadow-lg shadow-blue-500/20 shrink-0">
+        {/* Left Column: Shield Logo + Title Stack */}
+        <div className="flex items-start space-x-3.5">
+          <div className="p-2.5 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl shadow-lg shadow-blue-500/20 shrink-0 mt-0.5">
             <ShieldCheck className="w-6 h-6 text-white" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                Privacy Navigator
-              </h1>
+          <div className="flex flex-col space-y-1">
+            {/* Line 1: Title (One single line) */}
+            <h1 className="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent whitespace-nowrap">
+              Privacy Navigator
+            </h1>
+
+            {/* Line 2: Version */}
+            <div>
+              <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-mono font-semibold inline-block" id="app-version-tag">
+                v{versionData.version}
+              </span>
+            </div>
+
+            {/* Line 3: Framework Badge */}
+            <div>
               {onboardingPayload ? (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 flex-wrap">
                   <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-600/30 text-blue-300 border border-blue-400/40 font-semibold flex items-center gap-1">
                     <span>{onboardingPayload.determinedAssessmentType} Framework</span>
                   </span>
@@ -106,33 +117,22 @@ export const Header: React.FC<HeaderProps> = ({
                   )}
                 </div>
               ) : (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 font-medium">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 font-medium inline-block">
                   Standard 7-Step
                 </span>
               )}
-              <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-mono font-semibold" id="app-version-tag">
-                v{versionData.version}
-              </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+
+            {/* Line 4: Assistant Subtitle */}
+            <p className="text-xs text-slate-400">
               {onboardingPayload?.assessmentTitle || 'Guided Data Protection Impact Assessment Assistant'}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-start gap-2">
-          {/* Start New Evaluation Button */}
-          <button
-            onClick={onOpenNewEvaluation}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-amber-300 bg-amber-950/70 hover:bg-amber-900/90 rounded-lg border border-amber-500/50 transition shadow-sm"
-            id="start-new-eval-btn"
-            title="Start a new evaluation, jump to beginning, or load saved backup"
-          >
-            <PlusCircle className="w-4 h-4 text-amber-400" />
-            <span>➕ Start New Evaluation</span>
-          </button>
-
-          {/* Save Backup JSON Button */}
+        {/* Right Column: Action Buttons Grouped Left to Right */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Other Controls (Left of Exports) */}
           <button
             onClick={handleExportJson}
             className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-emerald-300 bg-emerald-950/60 hover:bg-emerald-900/80 rounded-lg border border-emerald-500/40 transition shadow-sm"
@@ -143,7 +143,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Save Backup (.json)</span>
           </button>
 
-          {/* Org Profile Manager Button */}
           <button
             onClick={onOpenOrgSettings}
             className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 bg-slate-800/90 hover:bg-slate-700 rounded-lg border border-slate-700 transition shadow-sm"
@@ -154,19 +153,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span>🏢 {orgProfile?.organizationName || 'Org Profile'}</span>
           </button>
 
-          {/* Sign Out Button */}
-          {onLogout && (
-            <button
-              onClick={onLogout}
-              className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold text-slate-400 hover:text-red-300 bg-slate-900 hover:bg-red-950/40 rounded-lg border border-slate-800 hover:border-red-500/40 transition shadow-sm"
-              title="Sign Out of Demo Evaluation Session"
-            >
-              <LogOut className="w-3.5 h-3.5 text-slate-400 hover:text-red-400" />
-              <span className="hidden sm:inline">Sign Out</span>
-            </button>
-          )}
-
-          {/* Framework Selector Button */}
           <button
             onClick={onOpenOnboarding}
             className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-blue-300 bg-blue-950/60 hover:bg-blue-900/80 rounded-lg border border-blue-500/40 transition shadow-sm"
@@ -176,7 +162,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Framework Selector</span>
           </button>
 
-          {/* Live Preview Button */}
           <button
             onClick={onOpenPreview}
             className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-600 transition shadow-sm"
@@ -186,7 +171,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Live Document Preview</span>
           </button>
 
-          {/* Export Word (.docx) */}
+          {/* Export Group (To Left of Sign Out & Start New Evaluation) */}
           <button
             onClick={handleDocxExport}
             disabled={isExporting}
@@ -197,7 +182,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Export Word (.docx)</span>
           </button>
 
-          {/* Export PDF */}
           <button
             onClick={handlePdfExport}
             disabled={isExporting}
@@ -207,6 +191,28 @@ export const Header: React.FC<HeaderProps> = ({
             <FileDown className="w-3.5 h-3.5" />
             <span>Export PDF</span>
           </button>
+
+          {/* Far Right Primary Actions: Start New Evaluation & Sign Out */}
+          <button
+            onClick={onOpenNewEvaluation}
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-amber-300 bg-amber-950/70 hover:bg-amber-900/90 rounded-lg border border-amber-500/50 transition shadow-sm"
+            id="start-new-eval-btn"
+            title="Start a new evaluation, jump to beginning, or load saved backup"
+          >
+            <PlusCircle className="w-4 h-4 text-amber-400" />
+            <span>➕ Start New Evaluation</span>
+          </button>
+
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold text-slate-400 hover:text-red-300 bg-slate-900 hover:bg-red-950/40 rounded-lg border border-slate-800 hover:border-red-500/40 transition shadow-sm"
+              title="Sign Out of Demo Evaluation Session"
+            >
+              <LogOut className="w-3.5 h-3.5 text-slate-400 hover:text-red-400" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </button>
+          )}
         </div>
       </div>
 

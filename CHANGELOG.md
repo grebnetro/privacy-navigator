@@ -2,6 +2,7 @@
 
 | Date | Version | Summary | Details |
 |------|---------|---------|---------|
+| 2026-08-06 | 0.18.0 | Header Bar Re-layout & Button Reordering | Updated Header.tsx layout: title forced to a single line ("Privacy Navigator"), stacked version tag, framework badge, and assistant subtitle vertically below title. Reordered buttons so Start New Evaluation and Sign Out sit at the far right, Export Word and Export PDF sit to their left, and other controls sit to the left of exports. |
 | 2026-08-06 | 0.17.0 | Restored Original ShieldCheck Privacy Badge Logo | Changed application logo back to the original ShieldCheck icon with gradient background badge container across Header, Onboarding Banner, and Login Page. |
 | 2026-08-06 | 0.16.0 | Rebranded Title to Privacy Navigator & Top Logo Alignment | Renamed application title to Privacy Navigator across Header, Login Page, and HTML metadata. Aligned the top of the Quest Diagnostics logo container flush with the top edge of all header action buttons. |
 | 2026-08-06 | 0.15.0 | Light Background Logo Container Update | Updated Quest Diagnostics DGX logo containers to a clean, crisp light white background (bg-white border-slate-200) across Header, Onboarding Banner, and Login Page for optimal brand visibility. |
