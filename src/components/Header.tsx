@@ -83,15 +83,15 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white px-4 lg:px-8 py-3.5 shadow-xl">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center space-x-3.5">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-4">
+        <div className="flex items-start space-x-3.5">
           <div className="p-1.5 bg-white rounded-xl border border-slate-200 shadow-md flex items-center justify-center shrink-0">
             <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-7 w-auto object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                Quest Privacy Navigator
+                Privacy Navigator
               </h1>
               {onboardingPayload ? (
                 <div className="flex items-center gap-1.5">
@@ -113,13 +113,13 @@ export const Header: React.FC<HeaderProps> = ({
                 v{versionData.version}
               </span>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-400 mt-0.5">
               {onboardingPayload?.assessmentTitle || 'Guided Data Protection Impact Assessment Assistant'}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-start gap-2">
           {/* Start New Evaluation Button */}
           <button
             onClick={onOpenNewEvaluation}

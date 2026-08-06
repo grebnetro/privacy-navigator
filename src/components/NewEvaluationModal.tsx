@@ -43,7 +43,7 @@ export const NewEvaluationModal: React.FC<NewEvaluationModalProps> = ({
       onClose();
     } catch (err) {
       console.error('Failed to load evaluation file:', err);
-      setLoadError('Invalid evaluation JSON file format. Please select a valid Quest Privacy Navigator backup.');
+      setLoadError('Invalid evaluation JSON file format. Please select a valid Privacy Navigator backup.');
     }
   };
 

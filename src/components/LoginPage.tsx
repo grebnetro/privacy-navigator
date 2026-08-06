@@ -42,7 +42,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-11 w-auto object-contain" />
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-            Quest Privacy Navigator
+            Privacy Navigator
           </h1>
           <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
             Enterprise Data Protection Impact Assessment (DPIA) & Regulatory Compliance Suite
