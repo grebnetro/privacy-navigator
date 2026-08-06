@@ -2,6 +2,7 @@
 
 | Date | Version | Summary | Details |
 |------|---------|---------|---------|
+| 2026-08-06 | 0.17.0 | Restored Original ShieldCheck Privacy Badge Logo | Changed application logo back to the original ShieldCheck icon with gradient background badge container across Header, Onboarding Banner, and Login Page. |
 | 2026-08-06 | 0.16.0 | Rebranded Title to Privacy Navigator & Top Logo Alignment | Renamed application title to Privacy Navigator across Header, Login Page, and HTML metadata. Aligned the top of the Quest Diagnostics logo container flush with the top edge of all header action buttons. |
 | 2026-08-06 | 0.15.0 | Light Background Logo Container Update | Updated Quest Diagnostics DGX logo containers to a clean, crisp light white background (bg-white border-slate-200) across Header, Onboarding Banner, and Login Page for optimal brand visibility. |
 | 2026-08-06 | 0.14.0 | Proof of Concept Dummy Login, GitHub Repo & Live Vercel Deployment | Created LoginPage.tsx with Quest branding, Enterprise SSO demo sign-in, and pre-populated evaluator credentials. Connected auth session handling in App.tsx and added Sign Out action to Header. Created GitHub repository (grebnetro/quest-privacy-navigator) and deployed live production application to Vercel. |

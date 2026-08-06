@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Lock, Mail, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState, type FormEvent } from 'react';
+import { ShieldCheck, Lock, Mail, ArrowRight, Sparkles } from 'lucide-react';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -10,7 +10,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [password, setPassword] = useState('password123');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
@@ -38,8 +38,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       <div className="max-w-md w-full relative z-10 space-y-6">
         {/* Logo & Portal Branding */}
         <div className="text-center space-y-3">
-          <div className="inline-flex p-3 bg-white rounded-2xl border border-slate-200 shadow-2xl items-center justify-center mb-1">
-            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-11 w-auto object-contain" />
+          <div className="inline-flex p-3 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-2xl shadow-2xl items-center justify-center mb-1">
+            <ShieldCheck className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             Privacy Navigator

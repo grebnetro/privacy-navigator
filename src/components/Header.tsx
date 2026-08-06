@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { 
+  ShieldCheck,
   FileDown, 
   FileText, 
   Eye, 
@@ -84,9 +85,9 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white px-4 lg:px-8 py-3.5 shadow-xl">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-4">
-        <div className="flex items-start space-x-3.5">
-          <div className="p-1.5 bg-white rounded-xl border border-slate-200 shadow-md flex items-center justify-center shrink-0">
-            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-7 w-auto object-contain" />
+        <div className="flex items-center space-x-3">
+          <div className="p-2.5 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl shadow-lg shadow-blue-500/20 shrink-0">
+            <ShieldCheck className="w-6 h-6 text-white" />
           </div>
           <div>
             <div className="flex items-center gap-2">
