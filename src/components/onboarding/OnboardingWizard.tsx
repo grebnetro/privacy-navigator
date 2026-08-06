@@ -160,8 +160,8 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
         <div className="absolute right-0 top-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-2 bg-slate-950/80 rounded-xl border border-slate-700/60 shadow-lg shrink-0 hidden sm:block">
-              <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-10 w-auto object-contain" />
+            <div className="p-2 bg-white rounded-xl border border-slate-200 shadow-md shrink-0 hidden sm:flex items-center justify-center">
+              <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-9 w-auto object-contain" />
             </div>
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-2">

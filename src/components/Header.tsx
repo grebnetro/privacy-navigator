@@ -85,8 +85,8 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white px-4 lg:px-8 py-3.5 shadow-xl">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center space-x-3.5">
-          <div className="p-1.5 bg-slate-950/90 rounded-xl border border-slate-700/60 shadow-lg shadow-blue-500/10 flex items-center justify-center shrink-0">
-            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-8 w-auto object-contain" />
+          <div className="p-1.5 bg-white rounded-xl border border-slate-200 shadow-md flex items-center justify-center shrink-0">
+            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-7 w-auto object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">

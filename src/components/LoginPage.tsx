@@ -38,8 +38,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       <div className="max-w-md w-full relative z-10 space-y-6">
         {/* Logo & Portal Branding */}
         <div className="text-center space-y-3">
-          <div className="inline-flex p-3 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-2xl items-center justify-center mb-1">
-            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-12 w-auto object-contain" />
+          <div className="inline-flex p-3 bg-white rounded-2xl border border-slate-200 shadow-2xl items-center justify-center mb-1">
+            <img src="/DGX.svg" alt="Quest Diagnostics Logo" className="h-11 w-auto object-contain" />
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             Quest Privacy Navigator
