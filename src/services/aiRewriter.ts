@@ -81,11 +81,17 @@ function cleanAndFixGrammarSentences(raw: string): string[] {
       .replace(/\bapp\b/gi, 'application')
       .replace(/\b(i|we|our team)\b/gi, 'the organization');
 
+    // Trim trailing prepositions, conjunctions, and incomplete connectors at end of sentence
+    clean = clean.trim().replace(/\b(of|to|for|in|with|on|at|by|from|about|over|under|and|or|such as)\s*$/i, '').trim();
+    clean = clean.replace(/[,;:-]\s*$/, '').trim();
+
+    if (!clean) return '';
+
     clean = clean.charAt(0).toUpperCase() + clean.slice(1);
     if (!clean.endsWith('.')) clean += '.';
 
     return clean;
-  });
+  }).filter(Boolean);
 }
 
 export async function rewordText(
@@ -93,7 +99,7 @@ export async function rewordText(
   tone: RewordTone = 'formal',
   promptContext?: string
 ): Promise<string> {
-  await new Promise((resolve) => setTimeout(resolve, 400));
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
   const trimmed = originalText.trim();
   if (!trimmed) return originalText;
@@ -101,12 +107,18 @@ export async function rewordText(
   const facts = extractUserFacts(trimmed);
   const concepts = analyzeConcepts(trimmed);
 
-  // Construct dynamic volume phrase from user facts
-  const volumeString = facts.volumePhrase
+  // Define clean, grammatical volume phrases
+  const volumeForPhrase = facts.volumePhrase
     ? `for approximately ${facts.volumePhrase}`
     : facts.numbers.length > 0
-    ? `for approximately ${facts.numbers[0]} affected individuals`
-    : 'for the active user base';
+    ? `for approximately ${facts.numbers[0]} affected records`
+    : 'across the active enterprise user base';
+
+  const volumeCoversSentence = facts.volumePhrase
+    ? `Processing covers approximately ${facts.volumePhrase}.`
+    : facts.numbers.length > 0
+    ? `Processing covers approximately ${facts.numbers[0]} affected records.`
+    : 'Processing covers the active user base across enterprise deployments.';
 
   const vendorString = facts.vendors.length > 0
     ? facts.vendors.join(', ')
@@ -119,56 +131,56 @@ export async function rewordText(
   // 1. AI Decision Support & Aggregated Data
   if (concepts.hasAIorLLM && (concepts.hasDecisionOrGuidance || concepts.hasAggregatedOrRolledUp || concepts.isExtension)) {
     if (tone === 'formal') {
-      return `This module operates as an artificial intelligence extension integrated into an existing enterprise application framework hosted within secure ${vendorString} infrastructure. The AI model evaluates multi-variable inputs to deliver high-level operational guidance ${volumeString}. Data processing is restricted strictly to aggregated summary metrics rather than individual-level personal data identifiers, with stored records retained strictly for operational lifecycles and ${retentionString} under signed sub-processor DPAs.`;
+      return `This module operates as an artificial intelligence extension integrated into an existing enterprise application framework hosted within secure ${vendorString} infrastructure. The AI model evaluates multi-variable inputs to deliver high-level operational guidance ${volumeForPhrase}. Data processing is restricted strictly to aggregated summary metrics rather than individual-level personal data identifiers, with stored records retained strictly for operational lifecycles and ${retentionString} under signed sub-processor DPAs.`;
     }
     if (tone === 'technical') {
-      return `Integrates an automated AI decision-support pipeline into host ${vendorString} infrastructure ${volumeString}. Algorithmic logic evaluates multi-dimensional inputs to generate high-level operational recommendations under signed sub-processor DPAs. Data pipelines operate exclusively on anonymized, rolled-up summary datasets, with automated ILM policies enforcing retention deletion (${retentionString}).`;
+      return `Integrates an automated AI decision-support pipeline into host ${vendorString} infrastructure ${volumeForPhrase}. Algorithmic logic evaluates multi-dimensional inputs to generate high-level operational recommendations under signed sub-processor DPAs. Data pipelines operate exclusively on anonymized, rolled-up summary datasets, with automated ILM policies enforcing retention deletion (${retentionString}).`;
     }
-    return `Integrates an AI decision-support extension into the application hosted on secure cloud infrastructure ${volumeString}, using aggregated summary data and ${retentionString}.`;
+    return `Integrates an AI decision-support extension into the application hosted on secure cloud infrastructure ${volumeForPhrase}, using aggregated summary data and ${retentionString}.`;
   }
 
   // 2. Health / Patient / Lab PHI Data
   if (concepts.hasHealthOrLab) {
     if (tone === 'formal') {
-      return `Protected Health Information (PHI) including clinical diagnostic records and patient health metrics are processed ${volumeString} under HIPAA privacy and security standards. Data is hosted in AES-256 encrypted ${vendorString} databases, accessed strictly via role-based access control (RBAC), and retained in compliance with statutory medical record retention schedules (${retentionString}).`;
+      return `Protected Health Information (PHI) including clinical diagnostic records and patient health metrics are processed ${volumeForPhrase} under HIPAA privacy and security standards. Data is hosted in AES-256 encrypted ${vendorString} databases, accessed strictly via role-based access control (RBAC), and retained in compliance with statutory medical record retention schedules (${retentionString}).`;
     }
     if (tone === 'technical') {
-      return `Clinical health diagnostic data and laboratory metrics ${volumeString} are ingested via TLS 1.3 encrypted conduits, stored within HIPAA-compliant ${vendorString} encrypted storage, and bound by third-party DPAs with ${retentionString}.`;
+      return `Clinical health diagnostic data and laboratory metrics ${volumeForPhrase} are ingested via TLS 1.3 encrypted conduits, stored within HIPAA-compliant ${vendorString} encrypted storage, and bound by third-party DPAs with ${retentionString}.`;
     }
-    return `Processes patient health and lab diagnostic records ${volumeString} securely in ${vendorString} storage under HIPAA compliance guidelines with ${retentionString}.`;
+    return `Processes patient health and lab diagnostic records ${volumeForPhrase} securely in ${vendorString} storage under HIPAA compliance guidelines with ${retentionString}.`;
   }
 
   // 3. AWS / Cloud Storage
   if (concepts.hasCloudOrAWS) {
     if (tone === 'formal') {
-      return `Information is housed within enterprise cloud sub-processors (${vendorString}) ${volumeString}, employing multi-region redundancy, role-based access control (RBAC), and continuous monitoring. Stored records are retained strictly for the operational lifecycle and ${retentionString}.`;
+      return `Information is housed within enterprise cloud sub-processors (${vendorString}) ${volumeForPhrase}, employing multi-region redundancy, role-based access control (RBAC), and continuous monitoring. Stored records are retained strictly for the operational lifecycle and ${retentionString}.`;
     }
     if (tone === 'technical') {
-      return `Storage is provisioned within ${vendorString} buckets ${volumeString}, featuring KMS envelope encryption, private VPC endpoints, and CloudTrail auditing. Automated ILM policies enforce object deletion (${retentionString}).`;
+      return `Storage is provisioned within ${vendorString} buckets ${volumeForPhrase}, featuring KMS envelope encryption, private VPC endpoints, and CloudTrail auditing. Automated ILM policies enforce object deletion (${retentionString}).`;
     }
-    return `Encrypted cloud storage hosted on secure ${vendorString} infrastructure ${volumeString} with strict access controls and ${retentionString}.`;
+    return `Encrypted cloud storage hosted on secure ${vendorString} infrastructure ${volumeForPhrase} with strict access controls and ${retentionString}.`;
   }
 
   // 4. Data Retention & Purge Lifecycle
   if (concepts.hasRetentionOrDeletion) {
     if (tone === 'formal') {
-      return `Personal data processed ${volumeString} via enterprise cloud sub-processors (${vendorString}) is retained strictly for the operational lifecycle required by purpose limitation principles and ${retentionString}.`;
+      return `Personal data processed ${volumeForPhrase} via enterprise cloud sub-processors (${vendorString}) is retained strictly for the operational lifecycle required by purpose limitation principles and ${retentionString}.`;
     }
     if (tone === 'technical') {
-      return `Automated Information Lifecycle Management (ILM) policies enforce programmatic object deletion ${volumeString} in ${vendorString} storage, securely overwriting data blocks upon lifecycle expiry (${retentionString}) under signed sub-processor DPAs.`;
+      return `Automated Information Lifecycle Management (ILM) policies enforce programmatic object deletion ${volumeForPhrase} in ${vendorString} storage, securely overwriting data blocks upon lifecycle expiry (${retentionString}) under signed sub-processor DPAs.`;
     }
-    return `Automated data retention lifecycle purges stored cloud records ${volumeString} upon lifecycle expiry (${retentionString}).`;
+    return `Automated data retention lifecycle purges stored cloud records ${volumeForPhrase} upon lifecycle expiry (${retentionString}).`;
   }
 
   // 5. Vendor & Sub-processor Sharing
   if (concepts.hasVendorOrSharing) {
     if (tone === 'formal') {
-      return `Third-party sub-processors (${vendorString}) processing data ${volumeString} are bound by formal Data Processing Agreements (DPAs) ensuring equivalent data protection standards, SOC 2 compliance, and ${retentionString}.`;
+      return `Third-party sub-processors (${vendorString}) processing data ${volumeForPhrase} are bound by formal Data Processing Agreements (DPAs) ensuring equivalent data protection standards, SOC 2 compliance, and ${retentionString}.`;
     }
     if (tone === 'technical') {
-      return `Sub-processors (${vendorString}) processing data ${volumeString} undergo SOC 2 Type II security evaluations and are restricted via signed DPAs with Standard Contractual Clauses (SCCs), enforcing ${retentionString}.`;
+      return `Sub-processors (${vendorString}) processing data ${volumeForPhrase} undergo SOC 2 Type II security evaluations and are restricted via signed DPAs with Standard Contractual Clauses (SCCs), enforcing ${retentionString}.`;
     }
-    return `Third-party cloud sub-processors (${vendorString}) process data ${volumeString} under signed Data Processing Agreements (DPAs) with strict retention limits.`;
+    return `Third-party cloud sub-processors (${vendorString}) process data ${volumeForPhrase} under signed Data Processing Agreements (DPAs) with strict retention limits.`;
   }
 
   // 6. General Fallback preserving exact user sentences & numbers
@@ -177,7 +189,7 @@ export async function rewordText(
 
   // Inject volume if present in user facts but missing from sentence context
   if (facts.volumePhrase && !combined.toLowerCase().includes(facts.volumePhrase.toLowerCase())) {
-    combined = combined.replace(/\bprocessed\b/i, `processed for approximately ${facts.volumePhrase}`);
+    combined = combined.replace(/\bprocessed\b/i, `processed ${volumeForPhrase}`);
   }
 
   // Auto-fill missing critical compliance elements if rewording for Nature of Processing
@@ -192,8 +204,8 @@ export async function rewordText(
 
   // Auto-fill missing volume/scope if rewording for Scope of Processing
   if (promptContext && promptContext.toLowerCase().includes('scope')) {
-    if (!/\d+/.test(combined) && !combined.toLowerCase().includes('thousand') && !combined.toLowerCase().includes('million')) {
-      combined += ` Processing covers approximately ${volumeString}.`;
+    if (!/\d+/.test(combined) && !combined.toLowerCase().includes('thousand') && !combined.toLowerCase().includes('million') && !combined.toLowerCase().includes('active user base') && !combined.toLowerCase().includes('enterprise deployments')) {
+      combined += ` ${volumeCoversSentence}`;
     }
   }
 

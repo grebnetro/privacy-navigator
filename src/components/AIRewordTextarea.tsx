@@ -147,12 +147,13 @@ export const AIRewordTextarea: React.FC<AIRewordTextareaProps> = ({
             {(() => {
               const volumeMatch = value.match(/\b(\d{1,3}(?:,\d{3})+|\d+)\s*(patients|customers|users|employees|individuals|records|subjects|clients)?/i);
               const userNum = volumeMatch ? volumeMatch[0] : null;
+              const formattedUserNum = userNum ? (/\b(patients|customers|users|employees|individuals|records|subjects|clients)\b/i.test(userNum) ? userNum : `${userNum} records`) : null;
               return (
                 <>
-                  {userNum && !rewordedResult.toLowerCase().includes(userNum.toLowerCase()) && (
+                  {userNum && formattedUserNum && !rewordedResult.toLowerCase().includes(userNum.toLowerCase()) && (
                     <button
                       type="button"
-                      onClick={() => setRewordedResult((prev) => `${prev} Processing covers approximately ${userNum}.`)}
+                      onClick={() => setRewordedResult((prev) => `${prev} Processing covers approximately ${formattedUserNum}.`)}
                       className="px-2 py-0.5 bg-amber-950/40 border border-amber-500/50 hover:border-amber-400 rounded text-[10px] text-amber-200 font-semibold transition"
                     >
                       + 👥 Include Your {userNum}
