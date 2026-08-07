@@ -50,10 +50,9 @@ export const Step1NeedView: React.FC<Step1NeedProps> = ({
   const [pitfallViolations, setPitfallViolations] = React.useState<PitfallViolation[]>([]);
   const [pitfallsDismissed, setPitfallsDismissed] = React.useState(false);
 
-  // Auto-init projectName from onboarding title if missing
   React.useEffect(() => {
-    if (!data.projectName && onboardingPayload?.projectTitle && !onboardingPayload.projectTitle.toLowerCase().includes('guided data protection')) {
-      onChange({ ...data, projectName: onboardingPayload.projectTitle });
+    if (!data.projectName && onboardingPayload?.projectTitle && onboardingPayload.projectTitle.trim()) {
+      onChange({ ...data, projectName: onboardingPayload.projectTitle.trim() });
     }
   }, [onboardingPayload?.projectTitle]);
 

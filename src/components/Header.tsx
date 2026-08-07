@@ -52,7 +52,8 @@ export const Header: React.FC<HeaderProps> = ({
   const [isExporting, setIsExporting] = useState(false);
   const [showSaveToast, setShowSaveToast] = useState(false);
 
-  const currentProjectName = formData.step1Need.projectName || onboardingPayload?.projectTitle || 'Privacy Assessment Project';
+  const rawProjectName = (formData.step1Need.projectName && formData.step1Need.projectName.trim()) || (onboardingPayload?.projectTitle && onboardingPayload.projectTitle.trim());
+  const currentProjectName = rawProjectName || '(Unassigned)';
 
   const handleDocxExport = async () => {
     try {
@@ -238,7 +239,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs pt-1.5 border-t border-slate-800/50">
           <div className="flex items-center gap-2 text-xs text-slate-300 font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
             <span className="px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-500/40 font-bold flex items-center gap-1.5 shrink-0" id="header-project-badge" title={`Current Project: ${currentProjectName}`}>
-              📁 Project: <span className="text-white">{currentProjectName}</span>
+              📁 Project: <span className={rawProjectName ? "text-white" : "text-slate-400 italic font-medium"}>{currentProjectName}</span>
             </span>
             <span className="text-slate-600 hidden md:inline">•</span>
             <span className="text-slate-400 hidden md:inline truncate">

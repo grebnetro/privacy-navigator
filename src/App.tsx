@@ -175,13 +175,16 @@ export function App() {
     }
 
     // Auto pre-fill project overview if currently blank
-    if (!formData.step1Need.projectOverview.trim() && payload.projectTitle) {
-      const overviewText = `${payload.projectTitle}\nJurisdiction: ${payload.jurisdiction}\nAssessment Mode: ${payload.assessmentTitle}\nRationale: ${payload.rationale}`;
+    if (!formData.step1Need.projectOverview.trim()) {
+      const overviewText = payload.projectTitle
+        ? `${payload.projectTitle}\nJurisdiction: ${payload.jurisdiction}\nAssessment Mode: ${payload.assessmentTitle}\nRationale: ${payload.rationale}`
+        : `Jurisdiction: ${payload.jurisdiction}\nAssessment Mode: ${payload.assessmentTitle}\nRationale: ${payload.rationale}`;
       updateFormData({
         ...formData,
         step1Need: {
           ...formData.step1Need,
           projectOverview: overviewText,
+          projectName: payload.projectTitle || formData.step1Need.projectName || '',
         },
       });
     }

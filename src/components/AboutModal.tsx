@@ -78,14 +78,14 @@ const FEATURE_CATEGORIES: FeatureCategory[] = [
   },
   {
     id: 'onboarding',
-    title: 'Smart Framework Selector & Onboarding Engine',
+    title: 'Smart Privacy Framework Selector Engine',
     icon: <Compass className="w-5 h-5 text-cyan-400" />,
     color: 'border-cyan-500/40 bg-cyan-950/20',
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
     features: [
       {
         name: '4-Step Setup Wizard',
-        description: 'Step-by-step onboarding flow collecting project scope, operational jurisdictions, data classifications, and processing characteristics.',
+        description: 'Step-by-step wizard collecting project scope, operational jurisdictions, data classifications, and processing characteristics.',
       },
       {
         name: 'Multi-Jurisdiction Rule Engine',

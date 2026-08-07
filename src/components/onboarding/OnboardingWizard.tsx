@@ -61,9 +61,8 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
     regionalFramework: initialState?.regionalFramework || '',
   });
 
-  const isTitleValid = !!formData.projectTitle.trim();
   const isJurisdictionValid = selectedRegionIds.length > 0;
-  const isStep1Valid = isTitleValid && isJurisdictionValid;
+  const isStep1Valid = isJurisdictionValid;
   const isStep2Valid = formData.dataTypes.length > 0;
 
   const handleNextStep1 = () => {
@@ -166,13 +165,13 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Compass className="w-3.5 h-3.5 text-blue-400" />
-                Initial Assessment Framework Gate
+                Assessment Framework Selector
               </div>
               <h1 className="text-2xl md:text-3xl font-extrabold font-heading text-white tracking-tight">
-                Privacy Framework Selector & Onboarding
+                Privacy Framework Selector
               </h1>
               <p className="text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
-                We'll guide you through 4 quick plain-English questions to determine the exact legal privacy assessment framework required for your project.
+                We'll guide you through quick plain-English questions to determine the exact legal privacy assessment framework required for your project.
               </p>
             </div>
           </div>
@@ -232,38 +231,27 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                   Step 1: Project Scope & Primary Jurisdiction
                 </h2>
                 <p className="text-xs text-slate-400 mt-1">
-                  Name your initiative and specify the primary geographic region where your data subjects reside.
+                  Optionally name your initiative and specify the primary geographic region where your data subjects reside.
                 </p>
               </div>
 
               <div className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center justify-between">
-                    <span>Project Title / Name *</span>
-                    {attemptedNext && !isTitleValid && (
-                      <span className="text-xs text-red-400 font-semibold flex items-center gap-1">
-                        <AlertCircle className="w-3.5 h-3.5" /> Required Field
-                      </span>
-                    )}
+                    <span>Project Title / Name (Optional)</span>
+                    <span className="text-[11px] text-slate-400 font-normal">Can be defined now or in Step 1 of assessment</span>
                   </label>
                   <InputWithSuggestions
                     id="onboarding-title-input"
                     value={formData.projectTitle}
                     onChangeValue={(val) => setFormData({ ...formData, projectTitle: val })}
                     suggestions={TITLE_SUGGESTIONS}
-                    placeholder="e.g. Quest Diagnostics Cloud EHR Analytics"
-                    className={`w-full bg-slate-950 border rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 ${
-                      attemptedNext && !isTitleValid
-                        ? 'border-red-500 bg-red-950/20 ring-2 ring-red-500/40'
-                        : 'border-slate-700 focus:ring-blue-500'
-                    }`}
+                    placeholder="e.g. Patient Lab Inquiry Web Portal (or leave blank to name later)"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  {attemptedNext && !isTitleValid && (
-                    <p className="text-xs text-red-400 mt-1.5 flex items-center gap-1">
-                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      Please enter a project title to proceed.
-                    </p>
-                  )}
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    If provided, this project name pre-fills into your report header and export filenames. If left blank, you can assign a title later in Step 1 of the assessment.
+                  </p>
                 </div>
 
                 <div>

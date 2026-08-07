@@ -161,7 +161,7 @@ export function generatePayload(state: OnboardingState): OnboardingPayload {
   const primaryJurisdiction = state.jurisdictions?.[0] || state.jurisdiction || 'GLOBAL';
   return {
     projectId: `proj-${Date.now()}`,
-    projectTitle: state.projectTitle || 'Quest Diagnostics Privacy Initiative',
+    projectTitle: state.projectTitle || '',
     jurisdiction: primaryJurisdiction,
     jurisdictions: state.jurisdictions?.length ? state.jurisdictions : [primaryJurisdiction],
     jurisdictionRegionIds: state.jurisdictionRegionIds || [],
