@@ -124,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* Line 4: Assistant Subtitle */}
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-400 whitespace-nowrap">
               {onboardingPayload?.assessmentTitle || 'Guided Data Protection Impact Assessment Assistant'}
             </p>
           </div>
@@ -140,7 +140,7 @@ export const Header: React.FC<HeaderProps> = ({
             title="Download a backup file (.json) of your current evaluation"
           >
             <Download className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Save Backup (.json)</span>
+            <span className="hidden sm:inline">Save Backup (.json)</span>
           </button>
 
           <button
@@ -150,25 +150,27 @@ export const Header: React.FC<HeaderProps> = ({
             title="Edit Organization Defaults (Controller Name, DPO Title, Contact)"
           >
             <Building2 className="w-3.5 h-3.5 text-slate-400" />
-            <span>🏢 {orgProfile?.organizationName || 'Org Profile'}</span>
+            <span className="hidden sm:inline">🏢 {orgProfile?.organizationName || 'Org Profile'}</span>
           </button>
 
           <button
             onClick={onOpenOnboarding}
             className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-blue-300 bg-blue-950/60 hover:bg-blue-900/80 rounded-lg border border-blue-500/40 transition shadow-sm"
             id="change-framework-btn"
+            title="Framework Selector"
           >
             <Compass className="w-3.5 h-3.5 text-blue-400" />
-            <span>Framework Selector</span>
+            <span className="hidden sm:inline">Framework Selector</span>
           </button>
 
           <button
             onClick={onOpenPreview}
             className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-600 transition shadow-sm"
             id="live-preview-btn"
+            title="Live Document Preview"
           >
             <Eye className="w-3.5 h-3.5 text-blue-400" />
-            <span>Live Document Preview</span>
+            <span className="hidden sm:inline">Live Document Preview</span>
           </button>
 
           {/* Export Group (To Left of Sign Out & Start New Evaluation) */}
@@ -177,9 +179,10 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={isExporting}
             className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-md shadow-blue-600/30 active:scale-95 disabled:opacity-50"
             id="download-docx-btn"
+            title="Export Word (.docx)"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>Export Word (.docx)</span>
+            <span className="hidden sm:inline">Export Word (.docx)</span>
           </button>
 
           <button
@@ -187,9 +190,10 @@ export const Header: React.FC<HeaderProps> = ({
             disabled={isExporting}
             className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition shadow-md shadow-emerald-600/30 active:scale-95 disabled:opacity-50"
             id="download-pdf-btn"
+            title="Export PDF"
           >
             <FileDown className="w-3.5 h-3.5" />
-            <span>Export PDF</span>
+            <span className="hidden sm:inline">Export PDF</span>
           </button>
 
           {/* Far Right Primary Actions: Start New Evaluation & Sign Out */}
@@ -200,7 +204,7 @@ export const Header: React.FC<HeaderProps> = ({
             title="Start a new evaluation, jump to beginning, or load saved backup"
           >
             <PlusCircle className="w-4 h-4 text-amber-400" />
-            <span>➕ Start New Evaluation</span>
+            <span className="hidden sm:inline">➕ Start New Evaluation</span>
           </button>
 
           {onLogout && (
@@ -217,7 +221,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Auto-Save & Manual Save Bar */}
-      <div className="max-w-7xl mx-auto mt-2 flex items-center justify-between text-xs">
+      <div className="max-w-7xl mx-auto mt-1 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
           {showSaveToast && (
             <span className="text-[11px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/40 animate-in fade-in duration-150">
@@ -227,6 +231,13 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         <div className="flex items-center gap-3">
+          {lastSavedAt && (
+            <span className="text-[11px] text-slate-400 flex items-center gap-1">
+              <Save className="w-3 h-3 text-emerald-400" />
+              Auto-saved locally at {lastSavedAt}
+            </span>
+          )}
+
           <button
             type="button"
             onClick={handleManualSave}
@@ -234,15 +245,8 @@ export const Header: React.FC<HeaderProps> = ({
             title="Save current entries to browser storage"
           >
             <Save className="w-3 h-3 text-blue-400" />
-            <span>Save Draft Now</span>
+            <span className="hidden sm:inline">Save Draft Now</span>
           </button>
-
-          {lastSavedAt && (
-            <span className="text-[11px] text-slate-400 flex items-center gap-1">
-              <Save className="w-3 h-3 text-emerald-400" />
-              Auto-saved locally at {lastSavedAt}
-            </span>
-          )}
         </div>
       </div>
     </header>

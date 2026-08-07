@@ -2,6 +2,7 @@
 
 | Date | Version | Summary | Details |
 |------|---------|---------|---------|
+| 2026-08-07 | 0.6.19 | Header Layout Adjustments, Mobile Icon Buttons & User Guide | Set "Guided Data Protection Impact Assessment Assistant" subtitle label to single line whitespace-nowrap flow. Elevated save/auto-save bar. Swapped Save Draft Now button to be right-aligned under Export PDF. Added mobile icon-only button rendering (hidden text labels on mobile). Created comprehensive USER_GUIDE.md documentation with categorized features and 16 screenshot placeholders. |
 | 2026-08-06 | 0.6.18 | Header Bar Re-layout & Button Reordering | Updated Header.tsx layout: title forced to a single line ("Privacy Navigator"), stacked version tag, framework badge, and assistant subtitle vertically below title. Reordered buttons so Start New Evaluation and Sign Out sit at the far right, Export Word and Export PDF sit to their left, and other controls sit to the left of exports. |
 | 2026-08-06 | 0.6.17 | Restored Original ShieldCheck Privacy Badge Logo | Changed application logo back to the original ShieldCheck icon with gradient background badge container across Header, Onboarding Banner, and Login Page. |
 | 2026-08-06 | 0.6.16 | Rebranded Title to Privacy Navigator & Top Logo Alignment | Renamed application title to Privacy Navigator across Header, Login Page, and HTML metadata. Aligned the top of the Quest Diagnostics logo container flush with the top edge of all header action buttons. |
