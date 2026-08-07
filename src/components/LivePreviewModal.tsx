@@ -1,25 +1,38 @@
 import React from 'react';
 import { X, FileText, FileDown, Printer, ShieldCheck } from 'lucide-react';
 import type { DPIAFormData } from '../types/dpia';
+import type { OnboardingPayload } from '../types/onboarding';
 import { exportToDocx } from '../services/docxExport';
 import { exportToPdf } from '../services/pdfExport';
+import { getFormattedExportFilename } from '../utils/exportFilename';
 import { DPIADocumentView } from './DPIADocumentView';
 
 interface LivePreviewModalProps {
   isOpen: boolean;
   onClose: () => void;
   formData: DPIAFormData;
+  onboardingPayload?: OnboardingPayload | null;
 }
 
 export const LivePreviewModal: React.FC<LivePreviewModalProps> = ({
   isOpen,
   onClose,
   formData,
+  onboardingPayload,
 }) => {
   if (!isOpen) return null;
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDocx = () => {
+    exportToDocx(formData, onboardingPayload);
+  };
+
+  const handlePdf = () => {
+    const filename = getFormattedExportFilename(formData, onboardingPayload, 'pdf');
+    exportToPdf('dpia-document-preview-modal', filename);
   };
 
   return (
@@ -31,16 +44,12 @@ export const LivePreviewModal: React.FC<LivePreviewModalProps> = ({
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold font-heading text-white">
-                ICO 7-Step DPIA Document Live Preview
-              </h3>
-              <p className="text-xs text-slate-400">
-                Official document format matching standard ICO schema (`dpia-template.docx`)
-              </p>
+              <h3 className="font-bold text-white text-base">Live Document Preview</h3>
+              <p className="text-xs text-slate-400">Review formatted regulatory report</p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
               className="p-2 text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-medium flex items-center gap-1.5 transition"
@@ -50,14 +59,14 @@ export const LivePreviewModal: React.FC<LivePreviewModalProps> = ({
               <span className="hidden sm:inline">Print</span>
             </button>
             <button
-              onClick={() => exportToDocx(formData)}
+              onClick={handleDocx}
               className="px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg flex items-center gap-1.5 transition"
             >
               <FileText className="w-4 h-4" />
               <span>Word (.docx)</span>
             </button>
             <button
-              onClick={() => exportToPdf('dpia-document-preview-modal', `DPIA_${formData.controllerDetails.controllerName || 'Official'}.pdf`)}
+              onClick={handlePdf}
               className="px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg flex items-center gap-1.5 transition"
             >
               <FileDown className="w-4 h-4" />

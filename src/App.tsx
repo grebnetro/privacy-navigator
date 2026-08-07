@@ -361,6 +361,7 @@ export function App() {
         isOpen={isPreviewOpen}
         onClose={() => setIsPreviewOpen(false)}
         formData={formData}
+        onboardingPayload={onboardingPayload}
       />
 
       <OrganizationSettingsModal

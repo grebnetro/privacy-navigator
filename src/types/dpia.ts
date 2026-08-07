@@ -17,6 +17,7 @@ export interface ControllerDetails {
 }
 
 export interface Step1Need {
+  projectName?: string;
   projectOverview: string;
   triggerReasons: string[];
 }

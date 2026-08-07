@@ -14,6 +14,8 @@ import {
 } from 'docx';
 import { saveAs } from 'file-saver';
 import type { DPIAFormData } from '../types/dpia';
+import type { OnboardingPayload } from '../types/onboarding';
+import { getFormattedExportFilename } from '../utils/exportFilename';
 
 const HEADER_BG = '1F2937'; // Dark Slate
 const HEADER_TEXT_COLOR = 'FFFFFF';
@@ -76,7 +78,7 @@ function createTextCell(text: string, widthPercent: number = 100, isBold: boolea
   });
 }
 
-export async function exportToDocx(formData: DPIAFormData): Promise<void> {
+export async function exportToDocx(formData: DPIAFormData, onboardingPayload?: OnboardingPayload | null): Promise<void> {
   const doc = new Document({
     sections: [
       {
@@ -484,6 +486,6 @@ export async function exportToDocx(formData: DPIAFormData): Promise<void> {
   });
 
   const blob = await Packer.toBlob(doc);
-  const fileName = `DPIA_${formData.controllerDetails.controllerName.replace(/[^a-zA-Z0-9]/g, '_') || 'Completed'}.docx`;
+  const fileName = getFormattedExportFilename(formData, onboardingPayload, 'docx');
   saveAs(blob, fileName);
 }

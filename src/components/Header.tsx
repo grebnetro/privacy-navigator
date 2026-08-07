@@ -14,6 +14,7 @@ import {
 import type { DPIAFormData } from '../types/dpia';
 import { exportToDocx } from '../services/docxExport';
 import { exportToPdf } from '../services/pdfExport';
+import { getFormattedExportFilename } from '../utils/exportFilename';
 import type { OnboardingPayload } from '../types/onboarding';
 import type { OrganizationProfile } from '../types/organization';
 import { exportEvaluationJson } from '../utils/evaluationStorage';
@@ -48,10 +49,12 @@ export const Header: React.FC<HeaderProps> = ({
   const [isExporting, setIsExporting] = useState(false);
   const [showSaveToast, setShowSaveToast] = useState(false);
 
+  const currentProjectName = formData.step1Need.projectName || onboardingPayload?.projectTitle || 'Privacy Assessment Project';
+
   const handleDocxExport = async () => {
     try {
       setIsExporting(true);
-      await exportToDocx(formData);
+      await exportToDocx(formData, onboardingPayload);
     } catch (err) {
       console.error('Docx Export failed:', err);
       alert('Failed to generate Word document. Please try again.');
@@ -63,7 +66,8 @@ export const Header: React.FC<HeaderProps> = ({
   const handlePdfExport = async () => {
     try {
       setIsExporting(true);
-      await exportToPdf('dpia-document-preview', `DPIA_${formData.controllerDetails.controllerName || 'Official'}.pdf`);
+      const filename = getFormattedExportFilename(formData, onboardingPayload, 'pdf');
+      await exportToPdf('dpia-document-preview', filename);
     } catch (err) {
       console.error('PDF Export failed:', err);
       alert('Failed to generate PDF. Make sure to open Live Preview first or use print.');
@@ -217,11 +221,17 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Shared Bottom Row: Assistant Subtitle (Left) & Save Draft / Auto-Saved Status (Right) */}
+        {/* Shared Bottom Row: Project Name & Subtitle (Left) & Save Draft / Auto-Saved Status (Right) */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs pt-1.5 border-t border-slate-800/50">
-          <p className="text-xs text-slate-400 whitespace-nowrap">
-            {onboardingPayload?.assessmentTitle || 'Guided Data Protection Impact Assessment Assistant'}
-          </p>
+          <div className="flex items-center gap-2 text-xs text-slate-300 font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+            <span className="px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-500/40 font-bold flex items-center gap-1.5 shrink-0" id="header-project-badge" title={`Current Project: ${currentProjectName}`}>
+              📁 Project: <span className="text-white">{currentProjectName}</span>
+            </span>
+            <span className="text-slate-600 hidden md:inline">•</span>
+            <span className="text-slate-400 hidden md:inline truncate">
+              {onboardingPayload?.assessmentTitle || 'Guided Data Protection Impact Assessment Assistant'}
+            </span>
+          </div>
 
           <div className="flex items-center gap-3 ml-auto">
             {showSaveToast && (

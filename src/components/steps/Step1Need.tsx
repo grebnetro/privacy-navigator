@@ -8,7 +8,8 @@ import { TextareaWithSuggestions } from '../InputWithSuggestions';
 import { checkStep1Pitfalls, type PitfallViolation } from '../../utils/pitfallChecker';
 
 import { getFrameworkTitles } from '../../utils/frameworkTitles';
-import { Search, CheckSquare, Square, AlertCircle } from 'lucide-react';
+import { generateProjectNameSuggestion } from '../../utils/exportFilename';
+import { Search, CheckSquare, Square, AlertCircle, Sparkles } from 'lucide-react';
 
 const OVERVIEW_SUGGESTIONS = [
   'Launch of an interactive AI Customer Support Assistant powered by an Enterprise LLM API to automatically handle tier-1 customer inquiries, track shipment status, and initiate return requests 24/7.',
@@ -49,6 +50,18 @@ export const Step1NeedView: React.FC<Step1NeedProps> = ({
   const [pitfallViolations, setPitfallViolations] = React.useState<PitfallViolation[]>([]);
   const [pitfallsDismissed, setPitfallsDismissed] = React.useState(false);
 
+  // Auto-init projectName from onboarding title if missing
+  React.useEffect(() => {
+    if (!data.projectName && onboardingPayload?.projectTitle && !onboardingPayload.projectTitle.toLowerCase().includes('guided data protection')) {
+      onChange({ ...data, projectName: onboardingPayload.projectTitle });
+    }
+  }, [onboardingPayload?.projectTitle]);
+
+  const handleSuggestProjectName = () => {
+    const suggested = generateProjectNameSuggestion(data.projectOverview, onboardingPayload?.projectTitle);
+    onChange({ ...data, projectName: suggested });
+  };
+
   const isOverviewEmpty = !data.projectOverview.trim();
 
   const handleNextClick = () => {
@@ -62,6 +75,14 @@ export const Step1NeedView: React.FC<Step1NeedProps> = ({
         setPitfallViolations(violations);
         return;
       }
+    }
+
+    // Auto-fill project name if still empty before proceeding
+    let updatedData = { ...data };
+    if (!data.projectName || !data.projectName.trim()) {
+      const autoName = generateProjectNameSuggestion(data.projectOverview, onboardingPayload?.projectTitle);
+      updatedData = { ...data, projectName: autoName };
+      onChange(updatedData);
     }
 
     setPitfallViolations([]);
@@ -100,9 +121,37 @@ export const Step1NeedView: React.FC<Step1NeedProps> = ({
         {/* Left Column: Form Fields */}
         <div className="lg:col-span-7 space-y-6">
           <div className="glass-panel rounded-xl p-5 space-y-5 border border-slate-800">
+            {/* 1.1 Project / System Name */}
             <div>
               <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>1.1 Project Overview & Business Aims *</span>
+                <span>1.1 Project / System Name *</span>
+                <button
+                  type="button"
+                  onClick={handleSuggestProjectName}
+                  className="text-[11px] font-semibold text-blue-300 hover:text-white bg-blue-950/60 hover:bg-blue-900/80 px-2 py-0.5 rounded border border-blue-500/40 transition flex items-center gap-1"
+                  title="Use AI to extract or suggest a concise project title from overview text"
+                >
+                  <Sparkles className="w-3 h-3 text-blue-400" />
+                  <span>✨ Auto-Suggest Name</span>
+                </button>
+              </label>
+              <input
+                type="text"
+                id="step1-project-name-input"
+                value={data.projectName || ''}
+                onChange={(e) => onChange({ ...data, projectName: e.target.value })}
+                placeholder="e.g. Patient Lab Inquiry Web Portal"
+                className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">
+                This project name displays in the top header bar and formats official export filenames (e.g. <span className="font-mono text-slate-300">{new Date().toISOString().slice(0, 10).replace(/-/g, '')} - {onboardingPayload?.determinedAssessmentType || 'DPIA'} - {data.projectName || 'Patient Lab Inquiry Web Portal'}.pdf</span>).
+              </p>
+            </div>
+
+            {/* 1.2 Project Overview */}
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>1.2 Project Overview & Business Aims *</span>
                 {attemptedNext && isOverviewEmpty && (
                   <span className="text-xs font-semibold text-red-400 flex items-center gap-1">
                     <AlertCircle className="w-3.5 h-3.5" /> Required Field
