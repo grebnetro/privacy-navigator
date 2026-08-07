@@ -19,7 +19,9 @@ import {
   FileCheck,
   Stethoscope,
   Building2,
-  Square
+  Square,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 import type { OrganizationProfile } from '../../types/organization';
@@ -44,6 +46,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
 }) => {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [attemptedNext, setAttemptedNext] = useState(false);
+  const [isSection1Expanded, setIsSection1Expanded] = useState(true);
 
   const [selectedItemIds, setSelectedItemIds] = useState<string[]>([]);
   const [selectedRegionIds, setSelectedRegionIds] = useState<string[]>(
@@ -69,6 +72,13 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
     setAttemptedNext(true);
     if (isStep1Valid) {
       setAttemptedNext(false);
+
+      // Assign project name when 'Continue to Step 2' is pressed if left blank
+      if (!formData.projectTitle.trim()) {
+        const assignedName = 'Privacy Assessment Project';
+        setFormData((prev) => ({ ...prev, projectTitle: assignedName }));
+      }
+
       setStep(2);
     }
   };
@@ -362,67 +372,94 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                 </div>
               )}
 
-              {/* Part 1: Real-World Data Information Selector */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
-                  <h3 className="text-xs font-bold text-blue-300 uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                    1. Select Specific Information Handled by Your System
-                  </h3>
-                  <span className="text-[11px] text-slate-400 font-medium">
-                    {selectedItemIds.length} item(s) selected
-                  </span>
+              {/* Part 1: Real-World Data Information Selector (Collapsible & Fully Expanded by Default) */}
+              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4 space-y-4 shadow-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <h3 className="text-xs font-bold text-blue-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      1. Select Specific Information Handled by Your System
+                    </h3>
+                    {/* Visual Completion Indicator */}
+                    {selectedItemIds.length === 0 ? (
+                      <span className="px-2.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-500/50 font-semibold text-[11px] flex items-center gap-1 shadow-sm">
+                        <AlertCircle className="w-3 h-3 text-amber-400 shrink-0" />
+                        <span>⚠️ Incomplete — Select Information</span>
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 font-semibold text-[11px] flex items-center gap-1 shadow-sm">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                        <span>✓ {selectedItemIds.length} item(s) selected</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsSection1Expanded(!isSection1Expanded)}
+                    className="text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5 ml-auto"
+                    title={isSection1Expanded ? "Collapse Section 1" : "Expand Section 1"}
+                  >
+                    <span>{isSection1Expanded ? 'Collapse Options' : 'Expand Options'}</span>
+                    {isSection1Expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                  </button>
                 </div>
 
-                <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
-                  {['Health & Medical', 'Biometric & Sensitive', 'Identity & Contact', 'Financial & Billing', 'Minors & Education'].map((groupName) => {
-                    const itemsInGroup = REAL_WORLD_DATA_ITEMS.filter((i) => i.group === groupName);
-                    return (
-                      <div key={groupName} className="space-y-2">
-                        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
-                          {groupName}
-                        </span>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                          {itemsInGroup.map((item) => {
-                            const isSelected = selectedItemIds.includes(item.id);
-                            return (
-                              <button
-                                key={item.id}
-                                type="button"
-                                onClick={() => handleToggleRealWorldItem(item.id)}
-                                className={`text-left px-3 py-2.5 rounded-xl border text-xs transition flex items-center justify-between ${
-                                  isSelected
-                                    ? 'bg-blue-600/25 border-blue-500 text-blue-100 font-medium shadow-inner'
-                                    : 'bg-slate-900/60 border-slate-800/80 text-slate-400 hover:border-slate-700 hover:text-slate-200'
-                                }`}
-                              >
-                                <span className="flex items-center gap-2 truncate">
-                                  <span className="text-sm shrink-0">{item.icon}</span>
-                                  <span className="truncate">{item.label}</span>
-                                </span>
-                                {isSelected ? (
-                                  <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 ml-1" />
-                                ) : (
-                                  <Square className="w-3.5 h-3.5 text-slate-700 shrink-0 ml-1" />
-                                )}
-                              </button>
-                            );
-                          })}
+                {/* Expanded Grid: All items 100% visible without scrollbox */}
+                {isSection1Expanded && (
+                  <div className="space-y-4 pt-3 border-t border-slate-800/80 animate-in fade-in duration-150">
+                    {['Health & Medical', 'Biometric & Sensitive', 'Identity & Contact', 'Financial & Billing', 'Minors & Education'].map((groupName) => {
+                      const itemsInGroup = REAL_WORLD_DATA_ITEMS.filter((i) => i.group === groupName);
+                      return (
+                        <div key={groupName} className="space-y-2">
+                          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                            {groupName}
+                          </span>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {itemsInGroup.map((item) => {
+                              const isSelected = selectedItemIds.includes(item.id);
+                              return (
+                                <button
+                                  key={item.id}
+                                  type="button"
+                                  onClick={() => handleToggleRealWorldItem(item.id)}
+                                  className={`text-left px-3 py-2.5 rounded-xl border text-xs transition flex items-center justify-between ${
+                                    isSelected
+                                      ? 'bg-blue-600/25 border-blue-500 text-blue-100 font-medium shadow-inner ring-1 ring-blue-500/50'
+                                      : 'bg-slate-900/60 border-slate-800/80 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                                  }`}
+                                >
+                                  <span className="flex items-center gap-2 truncate">
+                                    <span className="text-sm shrink-0">{item.icon}</span>
+                                    <span className="truncate">{item.label}</span>
+                                  </span>
+                                  {isSelected ? (
+                                    <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 ml-1" />
+                                  ) : (
+                                    <Square className="w-3.5 h-3.5 text-slate-700 shrink-0 ml-1" />
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Part 2: Auto-Determined Legal Classification Categories */}
               <div className="space-y-3 pt-4 border-t border-slate-800">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                    2. Auto-Determined Legal Classification Categories
+                  <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                    <span>2. Auto-Determined Legal Classification Categories</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-500/40 font-mono font-normal normal-case">
+                      {formData.dataTypes.length} Active
+                    </span>
                   </h3>
                   <span className="text-[11px] text-slate-400">
-                    (Auto-selected from your choices above)
+                    (Derived automatically from your choices in #1)
                   </span>
                 </div>
 
