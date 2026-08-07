@@ -20,7 +20,9 @@ export function getFormattedExportFilename(
   // Assessment Name (e.g. DPIA, HIPAA, PIA, US State PIA)
   let assessmentName = 'DPIA';
   const typeStr = onboardingPayload?.determinedAssessmentType || '';
-  if (typeStr.toUpperCase().includes('HIPAA')) {
+  if (typeStr.toUpperCase().includes('DPIA')) {
+    assessmentName = 'DPIA';
+  } else if (typeStr.toUpperCase().includes('HIPAA')) {
     assessmentName = 'HIPAA';
   } else if (typeStr.toUpperCase().includes('US_STATE')) {
     assessmentName = 'US State PIA';

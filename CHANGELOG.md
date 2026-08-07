@@ -2,6 +2,7 @@
 
 | Date | Version | Summary | Details |
 |------|---------|---------|---------|
+| 2026-08-07 | 0.6.23 | Export Filename DPIA Type Detection Priority Fix | Fixed getFormattedExportFilename in exportFilename.ts so DPIA assessment types check for "DPIA" before generic "PIA" substring matching. Filenames now correctly output "DPIA" (e.g. 20260807 - DPIA - Patient Lab Inquiry Web Portal.pdf). |
 | 2026-08-07 | 0.6.22 | Dynamic Export File Naming (YYYYMMDD - Assessment - Project) & Header Project Display | Added standardized export filename generator (YYYYMMDD - Assessment - Project Name.pdf/.docx). Added Project / System Name field (1.1) in Step 1 with ✨ AI Auto-Suggest Name button. Added active Project Name badge display in the Header bottom bar. |
 | 2026-08-07 | 0.6.21 | AI Reword Sentence Synthesis & Preposition Cleanup Fix | Resolved nonsensical sentence synthesis (e.g. "Processing covers approximately for the active user base") by refactoring volume phrase generators to eliminate double prepositions. Added trailing preposition stripping in cleanAndFixGrammarSentences to prevent dangling clauses (e.g. "over a large scope of."). Updated AI reword pill click format. |
 | 2026-08-07 | 0.6.20 | Header Right Justification & Same-Line Save Bar Alignment | Right-justified action buttons container so Sign Out sits flush right. Placed Guided Data Protection Impact Assessment Assistant label and Save Draft Now / Auto-saved status on the exact same horizontal line, with Save Draft Now right-aligned under Sign Out. |
