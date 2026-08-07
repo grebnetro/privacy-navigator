@@ -18,6 +18,7 @@ import type { OnboardingPayload } from './types/onboarding';
 
 import { OrganizationSettingsModal } from './components/OrganizationSettingsModal';
 import { NewEvaluationModal } from './components/NewEvaluationModal';
+import { AboutModal } from './components/AboutModal';
 import { LoginPage } from './components/LoginPage';
 import type { OrganizationProfile } from './types/organization';
 import { getStoredOrgProfile, saveOrgProfile } from './types/organization';
@@ -84,6 +85,7 @@ export function App() {
   const [isPreviewOpen, setIsPreviewOpen] = React.useState<boolean>(false);
   const [isOrgModalOpen, setIsOrgModalOpen] = React.useState<boolean>(false);
   const [isNewEvalModalOpen, setIsNewEvalModalOpen] = React.useState<boolean>(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = React.useState<boolean>(false);
   const [orgProfile, setOrgProfile] = React.useState<OrganizationProfile>(getStoredOrgProfile);
 
   const [showOnboarding, setShowOnboarding] = React.useState<boolean>(() => {
@@ -326,6 +328,7 @@ export function App() {
         onOpenPreview={() => setIsPreviewOpen(true)}
         onOpenOnboarding={() => setShowOnboarding(true)}
         onOpenOrgSettings={() => setIsOrgModalOpen(true)}
+        onOpenAbout={() => setIsAboutModalOpen(true)}
         onSaveManual={handleManualSave}
         onLogout={() => {
           sessionStorage.removeItem('quest_auth');
@@ -379,6 +382,11 @@ export function App() {
         onStartNewWizard={handleStartNewWizard}
         onStartBlank={handleStartBlank}
         onLoadBackup={handleLoadBackup}
+      />
+
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
       />
 
       {/* Offscreen element for canvas capturing anytime PDF Export is clicked */}

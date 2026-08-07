@@ -9,7 +9,8 @@ import {
   Download,
   Building2,
   Compass,
-  LogOut
+  LogOut,
+  Info
 } from 'lucide-react';
 import type { DPIAFormData } from '../types/dpia';
 import { exportToDocx } from '../services/docxExport';
@@ -29,6 +30,7 @@ interface HeaderProps {
   onOpenPreview: () => void;
   onOpenOnboarding: () => void;
   onOpenOrgSettings: () => void;
+  onOpenAbout: () => void;
   onSaveManual: () => void;
   onLogout?: () => void;
   lastSavedAt?: string;
@@ -42,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenPreview,
   onOpenOnboarding,
   onOpenOrgSettings,
+  onOpenAbout,
   onSaveManual,
   onLogout,
   lastSavedAt,
@@ -142,6 +145,16 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Download className="w-3.5 h-3.5 text-emerald-400" />
               <span className="hidden sm:inline">Save Backup (.json)</span>
+            </button>
+
+            <button
+              onClick={onOpenAbout}
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-blue-300 bg-blue-950/60 hover:bg-blue-900/80 rounded-lg border border-blue-500/40 transition shadow-sm"
+              id="about-btn"
+              title="About Quest Privacy Navigator Features & Capability Directory"
+            >
+              <Info className="w-3.5 h-3.5 text-blue-400" />
+              <span className="hidden sm:inline">About</span>
             </button>
 
             <button
