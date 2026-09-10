@@ -39,7 +39,7 @@ export function getDynamicGuidance(
       return {
         whyThisExists: 'Identifies which legal entity is the Data Controller and who oversees privacy compliance as the DPO.',
         plainEnglishExplanation: 'Enter your company name (the organization legally responsible for the data), and the name and title of the person who handles privacy questions — typically the Data Protection Officer.',
-        realWorldExample: `"Data Controller: Quest Diagnostics. DPO Contact: Keena Hausmann, Executive Director, Privacy Officer (privacy@questdiagnostics.com)."`,
+        realWorldExample: `"Data Controller: Acme Health. DPO Contact: Jane Doe, Executive Director, Privacy Officer (privacy@acmehealth.example)."`,
         commonPitfalls: [
           'Leaving the DPO contact blank or using a generic support email nobody monitors.',
           'Confusing the Controller (your company) with a third-party vendor or processor (e.g. AWS, OpenAI).',

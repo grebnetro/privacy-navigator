@@ -163,7 +163,7 @@ const STEP3_RULES: PitfallRule[] = [
   {
     id: 's3-no-names',
     pitfallDescription: 'Claiming consultation occurred without naming who was involved.',
-    suggestion: 'Name the specific people or teams consulted (e.g., "IT Security Lead", "Chief Legal Officer", "DPO Keena Hausmann").',
+    suggestion: 'Name the specific people or teams consulted (e.g., "IT Security Lead", "Chief Legal Officer", "the DPO").',
     fieldLabel: 'Stakeholders Consulted',
     detect: (text) => {
       if (text.length < 15) return false;

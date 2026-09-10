@@ -103,7 +103,7 @@ export const OrganizationSettingsModal: React.FC<OrganizationSettingsModalProps>
               required
               value={formData.organizationName}
               onChange={(e) => setFormData({ ...formData, organizationName: e.target.value })}
-              placeholder="e.g. Quest Diagnostics"
+              placeholder="e.g. Acme Health"
               className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -132,7 +132,7 @@ export const OrganizationSettingsModal: React.FC<OrganizationSettingsModalProps>
                 type="text"
                 value={formData.dpoContactName}
                 onChange={(e) => setFormData({ ...formData, dpoContactName: e.target.value })}
-                placeholder="e.g. Keena Hausmann"
+                placeholder="e.g. Jane Doe"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:ring-2 focus:ring-blue-500"
               />
             </div>

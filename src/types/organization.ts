@@ -78,9 +78,9 @@ export interface OrganizationProfile {
 }
 
 export const DEFAULT_ORG_PROFILE: OrganizationProfile = {
-  organizationName: 'Quest Diagnostics',
+  organizationName: '',
   dpoTitle: 'Executive Director, Privacy Officer',
-  dpoContactName: 'Keena Hausmann',
+  dpoContactName: '',
   activeOperatingJurisdictions: ['US', 'EU_EEA', 'CANADA', 'UK', 'BRAZIL', 'AUSTRALIA', 'GLOBAL'],
   defaultRegionalFrameworks: ['Canada PIPEDA', 'Brazil LGPD'],
 };

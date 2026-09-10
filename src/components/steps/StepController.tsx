@@ -16,7 +16,7 @@ interface StepControllerProps {
 }
 
 const CONTROLLER_SUGGESTIONS = [
-  'Quest Diagnostics',
+  'Acme Health',
 ];
 
 const DPO_TITLE_SUGGESTIONS = [
@@ -24,7 +24,7 @@ const DPO_TITLE_SUGGESTIONS = [
 ];
 
 const DPO_CONTACT_SUGGESTIONS = [
-  'Keena Hausmann',
+  'Jane Doe',
 ];
 
 export const StepController: React.FC<StepControllerProps> = ({
@@ -76,7 +76,7 @@ export const StepController: React.FC<StepControllerProps> = ({
                 value={data.controllerName}
                 onChangeValue={(val) => onChange({ ...data, controllerName: val })}
                 suggestions={CONTROLLER_SUGGESTIONS}
-                placeholder="e.g. Quest Diagnostics"
+                placeholder="e.g. Acme Health"
                 className={`w-full bg-slate-950 border rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 ${
                   attemptedNext && isNameEmpty
                     ? 'border-red-500 bg-red-950/20 ring-2 ring-red-500/40'
@@ -116,7 +116,7 @@ export const StepController: React.FC<StepControllerProps> = ({
                 value={data.dpoContactName}
                 onChangeValue={(val) => onChange({ ...data, dpoContactName: val })}
                 suggestions={DPO_CONTACT_SUGGESTIONS}
-                placeholder="e.g. Keena Hausmann"
+                placeholder="e.g. Jane Doe"
                 className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

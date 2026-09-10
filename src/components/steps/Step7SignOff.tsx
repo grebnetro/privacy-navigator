@@ -7,15 +7,15 @@ import { AIRewordTextarea } from '../AIRewordTextarea';
 import { FileSignature, ShieldCheck, UserCheck, Calendar, AlertCircle } from 'lucide-react';
 
 const APPROVED_BY_SUGGESTIONS = [
-  'Keena Hausmann, Executive Director, Privacy Officer',
+  'Jane Doe, Executive Director, Privacy Officer',
 ];
 
 const RESIDUAL_SUGGESTIONS = [
-  'Keena Hausmann, Executive Director, Privacy Officer',
+  'Jane Doe, Executive Director, Privacy Officer',
 ];
 
 const REVIEW_KEEPER_SUGGESTIONS = [
-  'Keena Hausmann, Executive Director, Privacy Officer',
+  'Jane Doe, Executive Director, Privacy Officer',
 ];
 
 interface Step7SignOffProps {
@@ -81,7 +81,7 @@ export const Step7SignOffView: React.FC<Step7SignOffProps> = ({
                   value={data.measuresApprovedBy}
                   onChangeValue={(val) => onChange({ ...data, measuresApprovedBy: val })}
                   suggestions={APPROVED_BY_SUGGESTIONS}
-                  placeholder="e.g. Keena Hausmann, Executive Director, Privacy Officer (2026-08-15)"
+                  placeholder="e.g. Jane Doe, Executive Director, Privacy Officer (2026-08-15)"
                   className={`w-full bg-slate-950 border rounded-lg px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 ${
                     attemptedFinish && isMeasuresEmpty
                       ? 'border-red-500 bg-red-950/20 ring-2 ring-red-500/40'
@@ -100,7 +100,7 @@ export const Step7SignOffView: React.FC<Step7SignOffProps> = ({
                   value={data.residualRisksApprovedBy}
                   onChangeValue={(val) => onChange({ ...data, residualRisksApprovedBy: val })}
                   suggestions={RESIDUAL_SUGGESTIONS}
-                  placeholder="e.g. Keena Hausmann, Executive Director, Privacy Officer"
+                  placeholder="e.g. Jane Doe, Executive Director, Privacy Officer"
                   className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -204,7 +204,7 @@ export const Step7SignOffView: React.FC<Step7SignOffProps> = ({
                   value={data.reviewKeeper}
                   onChangeValue={(val) => onChange({ ...data, reviewKeeper: val })}
                   suggestions={REVIEW_KEEPER_SUGGESTIONS}
-                  placeholder="e.g. Keena Hausmann, Executive Director, Privacy Officer (Annual Review)"
+                  placeholder="e.g. Jane Doe, Executive Director, Privacy Officer (Annual Review)"
                   className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-slate-100 focus:ring-2 focus:ring-indigo-500"
                 />
               </div>

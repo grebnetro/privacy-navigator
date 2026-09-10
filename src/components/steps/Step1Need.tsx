@@ -14,7 +14,7 @@ import { Search, CheckSquare, Square, AlertCircle, Sparkles } from 'lucide-react
 const OVERVIEW_SUGGESTIONS = [
   'Launch of an interactive AI Customer Support Assistant powered by an Enterprise LLM API to automatically handle tier-1 customer inquiries, track shipment status, and initiate return requests 24/7.',
   'Launch of a secure web-based billing portal allowing 45,000 residential utility customers to view monthly electricity statements, update payment methods, and make online payments.',
-  'Implementation of a cloud-based Electronic Health Record (EHR) data analytics pipeline for Quest Diagnostics patient lab results.',
+  'Implementation of a cloud-based Electronic Health Record (EHR) data analytics pipeline for patient lab results.',
 ];
 
 interface Step1NeedProps {

@@ -14,7 +14,7 @@ export interface EvaluationBackup {
 export function exportEvaluationJson(formData: DPIAFormData, onboardingPayload: OnboardingPayload | null): void {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
   const orgName = formData.controllerDetails.controllerName || 'Assessment';
-  const filename = `Quest_Privacy_Evaluation_${orgName.replace(/[^a-zA-Z0-9]/g, '_')}_${timestamp}.json`;
+  const filename = `Privacy_Evaluation_${orgName.replace(/[^a-zA-Z0-9]/g, '_')}_${timestamp}.json`;
 
   const backupData: EvaluationBackup = {
     version: '0.10.0',

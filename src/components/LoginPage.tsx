@@ -6,7 +6,7 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('evaluator@questdiagnostics.com');
+  const [email, setEmail] = useState('evaluator@example.com');
   const [password, setPassword] = useState('password123');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +14,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
-      sessionStorage.setItem('quest_auth', 'true');
+      sessionStorage.setItem('privacy_nav_auth', 'true');
       setIsLoading(false);
       onLogin();
     }, 600);
@@ -23,7 +23,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const handleSsoLogin = () => {
     setIsLoading(true);
     setTimeout(() => {
-      sessionStorage.setItem('quest_auth', 'true');
+      sessionStorage.setItem('privacy_nav_auth', 'true');
       setIsLoading(false);
       onLogin();
     }, 500);
@@ -59,7 +59,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2 group"
           >
             <Lock className="w-4 h-4 text-blue-200" />
-            <span>Sign In with Quest Enterprise SSO (Okta / Azure AD)</span>
+            <span>Sign In with Enterprise SSO (Okta / Azure AD)</span>
             <ArrowRight className="w-4 h-4 text-blue-200 group-hover:translate-x-1 transition-transform" />
           </button>
 
@@ -81,7 +81,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                placeholder="privacy.officer@questdiagnostics.com"
+                placeholder="privacy.officer@example.com"
               />
             </div>
 
@@ -142,7 +142,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </div>
 
         <p className="text-[11px] text-slate-500 text-center font-mono">
-          Quest Diagnostics Privacy Navigator • Proof of Concept Demo
+          Privacy Navigator • Proof of Concept Demo
         </p>
       </div>
     </div>

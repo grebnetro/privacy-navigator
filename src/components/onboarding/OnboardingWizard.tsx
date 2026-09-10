@@ -34,7 +34,7 @@ interface OnboardingWizardProps {
 }
 
 const TITLE_SUGGESTIONS = [
-  'Quest Diagnostics Cloud EHR Analytics',
+  'Cloud EHR Analytics Pipeline',
   'Patient Lab Inquiry Web Portal',
   'AI Customer Support Assistant',
 ];
@@ -144,7 +144,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
     const derived = deriveCategoriesFromItems(presetItemIds);
 
     setFormData({
-      projectTitle: 'Quest Diagnostics Cloud EHR Analytics',
+      projectTitle: 'Cloud EHR Analytics Pipeline',
       jurisdiction: 'EU_EEA',
       jurisdictions: ['EU_EEA', 'US', 'GLOBAL'],
       jurisdictionRegionIds: presetRegionIds,
@@ -192,7 +192,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
             className="self-start md:self-center px-4 py-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-blue-500/50 rounded-xl text-xs font-semibold transition flex items-center gap-2 shrink-0 shadow-sm"
           >
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <span>Pre-fill Quest Diagnostics Example</span>
+            <span>Pre-fill Example Scenario</span>
           </button>
         </div>
 
@@ -744,7 +744,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                 </p>
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-400">
                   <strong className="text-slate-200 block mb-1">Example Scenario:</strong>
-                  If Quest Diagnostics launches an analytics pipeline for European lab results, select <strong>EU/EEA</strong> to trigger GDPR guidelines.
+                  If your organization launches an analytics pipeline for European lab results, select <strong>EU/EEA</strong> to trigger GDPR guidelines.
                 </div>
               </div>
             )}

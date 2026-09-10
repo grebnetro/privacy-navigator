@@ -47,7 +47,7 @@ const FEATURE_CATEGORIES: FeatureCategory[] = [
       },
       {
         name: 'Session Persistence & Auth Guards',
-        description: 'Session storage management (quest_auth) guarding all evaluation workflows against unauthenticated access.',
+        description: 'Session storage management (privacy_nav_auth) guarding all evaluation workflows against unauthenticated access.',
       },
       {
         name: 'One-Click Header Sign-Out',
@@ -225,7 +225,7 @@ const FEATURE_CATEGORIES: FeatureCategory[] = [
         description: 'Responsive top navigation featuring single-line titles, stacked version/framework badges, right-justified action buttons, and mobile icon-only rendering.',
       },
       {
-        name: 'Corporate Quest Diagnostics Branding',
+        name: 'Corporate Branding',
         description: 'Dark slate backdrop paired with corporate blue/emerald accents and official logo containers.',
       },
     ],
@@ -263,7 +263,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold font-heading text-white text-lg tracking-tight">
-                  Quest Privacy Navigator
+                  Privacy Navigator
                 </h3>
                 <span className="text-[11px] px-2 py-0.5 rounded-md bg-blue-600/30 text-blue-300 border border-blue-400/40 font-mono font-semibold">
                   v{versionData.version}
@@ -363,7 +363,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         {/* Footer */}
         <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 shrink-0">
           <div>
-            <span>Quest Privacy Navigator • Built with React, TypeScript & Tailwind CSS</span>
+            <span>Privacy Navigator • Built with React, TypeScript & Tailwind CSS</span>
           </div>
           <button
             onClick={onClose}

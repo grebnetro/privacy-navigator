@@ -75,7 +75,7 @@ const initialFormData: DPIAFormData = {
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(() => {
     try {
-      return sessionStorage.getItem('quest_auth') === 'true';
+      return sessionStorage.getItem('privacy_nav_auth') === 'true';
     } catch {
       return false;
     }
@@ -334,7 +334,7 @@ export function App() {
         onOpenAbout={() => setIsAboutModalOpen(true)}
         onSaveManual={handleManualSave}
         onLogout={() => {
-          sessionStorage.removeItem('quest_auth');
+          sessionStorage.removeItem('privacy_nav_auth');
           setIsAuthenticated(false);
         }}
         lastSavedAt={lastSavedAt}

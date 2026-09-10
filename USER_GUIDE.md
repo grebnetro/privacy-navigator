@@ -1,18 +1,18 @@
-# Quest Privacy Navigator — Comprehensive User & Evaluator Guide
+# Privacy Navigator — Comprehensive User & Evaluator Guide
 
-Welcome to the **Quest Privacy Navigator User & Evaluator Guide**. This guide provides a complete walkthrough for privacy officers, data protection specialists, compliance managers, and enterprise lead evaluators. It covers every capability built into Quest Privacy Navigator — from initial sign-in and setup to completing a 7-step Data Protection Impact Assessment (DPIA), leveraging AI polishing, and exporting audit-ready PDF and Word reports.
+Welcome to the **Privacy Navigator User & Evaluator Guide**. This guide provides a complete walkthrough for privacy officers, data protection specialists, compliance managers, and enterprise lead evaluators. It covers every capability built into Privacy Navigator — from initial sign-in and setup to completing a 7-step Data Protection Impact Assessment (DPIA), leveraging AI polishing, and exporting audit-ready PDF and Word reports.
 
 ---
 
 ## 1. Introduction & Feature Directory
 
-Quest Privacy Navigator (Guided Data Protection Impact Assessment Assistant) is an enterprise-grade compliance platform designed to streamline, standardize, and automate Privacy Impact Assessments (PIAs) and Data Protection Impact Assessments (DPIAs) under global regulations including **EU/UK GDPR (Article 35)**, **US HIPAA Security Rule**, and **US State Consumer Privacy Acts**.
+Privacy Navigator (Guided Data Protection Impact Assessment Assistant) is an enterprise-grade compliance platform designed to streamline, standardize, and automate Privacy Impact Assessments (PIAs) and Data Protection Impact Assessments (DPIAs) under global regulations including **EU/UK GDPR (Article 35)**, **US HIPAA Security Rule**, and **US State Consumer Privacy Acts**.
 
 ### Categorized Feature Directory
 
 #### 🔐 1. Authentication & Session Security
 * **Enterprise SSO Demo Authentication**: Simulated single sign-on login interface with pre-filled evaluator credentials for rapid onboarding and security compliance.
-* **Session Persistence & Auth Guards**: Session storage management (`quest_auth`) guarding all assessment workflows against unauthorized access.
+* **Session Persistence & Auth Guards**: Session storage management (`privacy_nav_auth`) guarding all assessment workflows against unauthorized access.
 * **Header Sign-Out Action**: One-click session sign-out with automated token revocation and state reset.
 
 #### ⚙️ 2. Organization Defaults & Profile Management
@@ -68,7 +68,7 @@ Quest Privacy Navigator (Guided Data Protection Impact Assessment Assistant) is 
 
 #### 🎨 8. User Interface & Layout Design
 * **Header Bar & Mobile Layout**: Responsive top navigation bar featuring single-line flow for project titles, stacked version/framework tags, and mobile icon-only button rendering.
-* **Corporate Quest Diagnostics Branding**: Dark slate backdrop paired with corporate blue/emerald accents and official logo containers.
+* **Corporate Branding**: Dark slate backdrop paired with corporate blue/emerald accents and official logo containers.
 
 ---
 
@@ -80,12 +80,12 @@ Follow this step-by-step walkthrough to complete a privacy impact assessment fro
 
 ### Phase 1: Enterprise SSO Authentication
 
-1. Navigate to the Quest Privacy Navigator URL in your web browser.
+1. Navigate to the Privacy Navigator URL in your web browser.
 2. The **Enterprise SSO Demo Authentication** screen will appear.
-3. Review the pre-populated evaluator credentials (*Evaluator ID: `evaluator@questdiagnostics.com`*).
+3. Review the pre-populated evaluator credentials (*Evaluator ID: `evaluator@example.com`*).
 4. Click **Sign In with Enterprise SSO** to authenticate and launch your session.
 
-![Screenshot Placeholder: Login Page with Enterprise SSO and Quest Diagnostics Branding](https://via.placeholder.com/1200x600/0f172a/ffffff?text=SCREENSHOT+PLACEHOLDER+1%3A+Login+Page+with+Enterprise+SSO+and+Quest+Diagnostics+Branding)
+![Screenshot Placeholder: Login Page with Enterprise SSO and Corporate Branding](https://via.placeholder.com/1200x600/0f172a/ffffff?text=SCREENSHOT+PLACEHOLDER+1%3A+Login+Page+with+Enterprise+SSO+and+Corporate+Branding)
 
 ---
 
@@ -93,9 +93,9 @@ Follow this step-by-step walkthrough to complete a privacy impact assessment fro
 
 1. In the header bar, click **🏢 Org Profile** (or the building icon on mobile).
 2. In the **Organization Defaults Modal**, configure your enterprise attributes:
-   * **Organization / Data Controller Name**: (e.g., *Quest Diagnostics Incorporated*)
+   * **Organization / Data Controller Name**: (e.g., *Acme Health Incorporated*)
    * **DPO Name & Title**: (e.g., *Jane Doe, Chief Privacy Officer & DPO*)
-   * **DPO Contact Email**: (e.g., *dpo@questdiagnostics.com*)
+   * **DPO Contact Email**: (e.g., *dpo@acmehealth.example*)
 3. Click **Save Defaults**. These credentials will automatically populate throughout all 7 assessment steps and final document exports.
 
 ![Screenshot Placeholder: Organization Settings & Defaults Modal](https://via.placeholder.com/1200x600/0f172a/ffffff?text=SCREENSHOT+PLACEHOLDER+2%3A+Organization+Settings+%26+Defaults+Modal)
